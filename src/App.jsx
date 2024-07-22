@@ -1,14 +1,13 @@
 import './App.css'
+import { BrowserRouter, Route } from 'react-router-dom';
+import OtpForm from './components/OtpForm';
 
 function App() {
 
 
   return (
-    <div className='bg-gray-800'>
-      <h1 className="text-3xl font-bold text-center underline">
-      Hello world!
-    </h1>
-    </div>
+
+    <h1>Home page</h1>
   )
 }
 
