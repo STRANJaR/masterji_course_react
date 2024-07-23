@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import toast, { Toaster} from 'react-hot-toast';
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
+import branding from '../assets/branding.png'
 
 
 function OtpForm() {
@@ -74,15 +74,25 @@ function OtpForm() {
     }
   }
 
-  const handleClick = () => {
-    if(verified){
-      redirect()
-    }
-   }
+  // const handleClick = () => {
+  //   if(verified){
+  //     // redirect()
+  //   }
+  //  }
   
 
   return (
     <main className='bg-[#3F72AF] min-h-screen ' >
+      <Link to={'https://chaicode.com/'} target='_blank'>
+      <img 
+      className='absolute bottom-10 right-10 rounded-lg'
+      src={branding}  
+      width={'100px'} 
+      alt="branding.png" 
+      />
+      </Link>
+
+
       <Toaster
       position="top-right"
       reverseOrder={false}
@@ -98,13 +108,13 @@ function OtpForm() {
       otp.map((value, index)=> {
         return <input 
         className= {`w-[50px] h-[50px] m-[7px] 
-        text-center text-[1rem] rounded-sm bg-[#DBE2EF] outline-none  ${verified ? 'outline-[#23CF9B]' : 'outline-none'} ${error ? 'outline-red-400': 'bg-[#112D4E]'} `}
+        text-center text-[1rem] rounded-sm bg-[#DBE2EF] outline-none  ${verified ? 'outline-[#23CF9B]' : 'outline-none'} ${error ? 'outline-[#EB2D5B]': 'bg-[#112D4E]'} `}
         key={index}
         type="text" 
         ref={((input)=> inputRefs.current[index] = input)}
         value={value}
         onChange={((e)=> handleChange(index, e))}
-        onClick={handleClick}
+        onClick={''}
         onKeyDown={((e)=> handleKeyDown(index, e))} 
 
         />
@@ -115,7 +125,7 @@ function OtpForm() {
       <button
       onClick={otpVerification}
       className= {`bg-[#112D4E] text-white w-[15.6rem] h-12 transition-all rounded-md my-4
-        ${verified ? 'bg-[#23CF9B]' : '' } ${error ? 'bg-red-400': 'bg-[#112D4E]'} `}
+        ${verified ? 'bg-[#23CF9B]' : '' } ${error ? 'bg-[#EB2D5B]': 'bg-[#112D4E]'} `}
       >
         {!verified ? 'Verify Account': 'Verified'}
       </button>
