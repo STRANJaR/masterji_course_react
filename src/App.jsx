@@ -1,6 +1,5 @@
 import './App.css'
-import { BrowserRouter, Route } from 'react-router-dom';
-import OtpForm from './components/OtpForm';
+
 
 function App() {
 

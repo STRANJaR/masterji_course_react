@@ -1,11 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import toast, { Toaster} from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
+
 
 
 function OtpForm() {
-  const validOTP = 1234;
+  const validOTP = '1234';
   const otpLength = 4
-  const [otp, setOtp] = useState(new Array(otpLength).fill(''))
 
+  const navigate = useNavigate();
+  const [otp, setOtp] = useState(new Array(otpLength).fill(''))
+  const [verified, setVerified] = useState(false);
+  const [error, setError] = useState(false);
   const inputRefs = useRef([]);
 
   const newOTP = [...otp]
@@ -21,12 +27,26 @@ function OtpForm() {
 
 
   const otpVerification = () => {
-    if(combinedOTP === '1234'){
+
+    if(combinedOTP === validOTP){
+      setVerified(true)
+      setError(false)
+      toast.success('Login Success');
       console.log('login successful');
+
+      setTimeout(() => {
+       navigate('/course-list')
+      }, 2000);
+
     } else{
+      setError(true)
+      setVerified(false)
+      toast.error('Invalid OTP')
       console.log('invalid otp');
     }
   }
+
+
   // input handle change functionality
   const handleChange = (index, e) => { 
     const value = e.target.value;
@@ -54,11 +74,19 @@ function OtpForm() {
     }
   }
 
-  const handleClick = () => { }
+  const handleClick = () => {
+    if(verified){
+      redirect()
+    }
+   }
   
 
   return (
     <main className='bg-[#3F72AF] min-h-screen ' >
+      <Toaster
+      position="top-right"
+      reverseOrder={false}
+      />
       <h1 className='text-4xl font-extrabold text-center py-10'>Chai aur Code</h1>
       <div className='flex flex-col justify-center items-center'>
 
@@ -69,8 +97,8 @@ function OtpForm() {
     {
       otp.map((value, index)=> {
         return <input 
-        className='w-[50px] h-[50px] m-[5px] 
-        text-center text-[1rem] rounded-sm bg-[#DBE2EF] outline-blue-400 '
+        className= {`w-[50px] h-[50px] m-[7px] 
+        text-center text-[1rem] rounded-sm bg-[#DBE2EF] outline-none  ${verified ? 'outline-[#23CF9B]' : 'outline-none'} ${error ? 'outline-red-400': 'bg-[#112D4E]'} `}
         key={index}
         type="text" 
         ref={((input)=> inputRefs.current[index] = input)}
@@ -85,10 +113,12 @@ function OtpForm() {
 
     <div>
       <button
-      
       onClick={otpVerification}
-      className='bg-[#112D4E] text-white w-[14.5rem] h-12 rounded-md my-4'
-      >Verify Account</button>
+      className= {`bg-[#112D4E] text-white w-[15.6rem] h-12 transition-all rounded-md my-4
+        ${verified ? 'bg-[#23CF9B]' : '' } ${error ? 'bg-red-400': 'bg-[#112D4E]'} `}
+      >
+        {!verified ? 'Verify Account': 'Verified'}
+      </button>
 
       <p className='text-sm text-[#BFBFBF]'> Didn’t receive code? <a href="#" className='text-blue-800 underline'>Resend</a> </p>
     </div>

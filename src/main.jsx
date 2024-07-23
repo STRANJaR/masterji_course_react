@@ -4,12 +4,17 @@ import App from './App.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import OtpForm from './components/OtpForm.jsx';
+import CourseList from './components/CouseList.jsx'
 
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <OtpForm/>
+  },
+  {
+    path: '/course-list',
+    element: <CourseList/>
   }
 ])
 
