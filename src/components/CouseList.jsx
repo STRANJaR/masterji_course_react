@@ -4,7 +4,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import courseDataJSON from '../course.json'
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import DropDown from "./DropDown";
 
 
@@ -113,10 +113,15 @@ function CouseList() {
         
 
             <div className="bg-[#F9F7F7] shadow-md min-h-3.5 w-2/3 ml-5 p-4 rounded-lg"> 
-                    <div>
+                    <div className="flex items-center  gap-4">
                         <h1 className="text-2xl font-bold text-[#313131]">Manage Bundle</h1>
-                        <p className="text-sm text-[#4B4747]">Change orders of the products based on priorty</p>
+                        <Link
+                        to={'/batches'}
+                        className="px-2 py-1 text-[0.7rem] bg-purple-200 border border-gray-400 rounded-md">
+                            Batches <FontAwesomeIcon icon={faArrowRight}/>
+                            </Link>
                     </div>
+                        <p className="text-sm text-[#4B4747]">Change orders of the products based on priorty</p>
 
                 <div className="pt-5">
                     <Droppable droppableId="course">
