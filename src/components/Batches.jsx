@@ -1,18 +1,28 @@
 import { useState, useEffect } from 'react';
 import batchesJSON from '../batches.json';
 import { Link } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 import '../App.css'
 import picture from '../assets/course1.png';
 import branding from '../assets/branding.png'
 
 function Batches() {
     const [batches, setBatches] = useState([])
-    const [isPublished , setIsPublished] = useState(true)
+    // const [isPublished , setIsPublished] = useState(true)
+    const [query, setQuery] = useState("");
 
-    useEffect(()=> {
+    useEffect(()=> {    
         setBatches(batchesJSON)
     },[])
 
+    const serach_prams = Object.keys(Object.assign({}), ...batches);
+    const searchBox = (batches) => {
+        return batches.filter(data => (
+            serach_prams.some((prams)=>(
+                data[prams].toString().toLowerCase().includes(query)
+            ))
+        ))
+    }
   return (
     <div className="bg-[#E2BBE9] border-white h-screen w-full ">
 
@@ -39,6 +49,20 @@ function Batches() {
 
 
             <div className="bg-white text-[#4B4747] w-full h-auto ">
+                <input 
+                onChange={(e)=> setQuery(e.target.value)}
+                type="search" 
+                name='search-form'
+                id='search-form'
+                className='outline-none border border-[#BEBEBE] p-2 ml-3 mb-2 w-68 rounded-md'
+                placeholder='Search by Title (alt+k or cmd+k)'
+                />
+
+                <button
+                onClick={()=> searchBox}
+                className='px-7 py-2.5 rounded-md ml-3  text-sm bg-[#6C6BAF] text-[#FFFFFF]'
+                >Search</button>
+
 
                 <table 
                 style={{width:"100%"}}
