@@ -6,19 +6,16 @@ import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import DropDown from "./DropDown";
-// import CustomContextMenu from "./CustomContextMenu";
-// import course1 from '../assets/course1.png'
+
 
 function CouseList() {
 
     const [courseData, setCourseData] = useState([]);
     const [courseBox, setCourseBox] = useState(courseDataJSON);
-    // const [openContextMenu, setOpenContextMenu] = useState(false);
-    const [openDropDown, setOpenDropDown] = useState(false);
 
     useState(()=> {
         setCourseData(courseDataJSON)
-    }, [courseData])
+    }, [courseData, courseBox])
 
     // handle dragEnd for DragDropContext
     const handleDragEnd = (result) => {
@@ -28,9 +25,76 @@ function CouseList() {
         const [draggedItem] = newCourseBox.splice(result.source.index, 1);
         newCourseBox.splice(result.destination.index, 0, draggedItem);
         setCourseBox(newCourseBox)
+        console.log(courseBox)
         console.log(newCourseBox);
+
+        const updatedData = newCourseBox.map(data => (
+            {
+                ...data,
+                isShow: false,
+                isTop: false,
+                isBottom: false
+            }
+        ))
+
+        console.log(updatedData);
+        setCourseBox(updatedData)
     }
 
+    // const handleMoreButton = (e) => {
+    //     console.log(e.target.dataset);
+    // }
+
+    const handleDropDown = (e) => {
+        const { dataset } = e.target
+        e.target.dataset
+        console.log(dataset);
+
+        setCourseBox((prevCourseData)=> (
+            prevCourseData.map(data => (
+                data.id == dataset.id ? ({...data, isShow: !data.isShow}) : data
+            ))
+        ))
+    }
+
+    // Move to top handler 
+    const moveToTopHandler = () => {
+        // const { dataset } = e.target
+        // e.target.dataset
+
+        // setCourseBox((prevCoursePosition)=> (
+        //     prevCoursePosition.filter(data => (
+        //         data.id == dataset.id ? (
+        //             {
+        //                 data,
+        //                 isTop: !data.isTop
+        //             }
+        //         ) : data
+        //     ))
+        // ))
+        // console.log(courseBox);
+
+
+    }
+
+    const removeCourse = (e) => {
+        const newCourseBox = [...courseBox];
+        const { dataset } = e.target
+        e.target.dataset
+
+
+        newCourseBox.map(course => (
+            course.id == dataset.id ? 
+            setCourseBox(courseBox.filter(course => course.id != dataset.id )) 
+            : course
+        ))
+
+        // newCourseBox.splice(dataset.id, 1)
+        // setCourseBox(
+        //     newCourseBox.filter(course => course.length)
+        // )
+        console.log(dataset.id)
+    }
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
         
@@ -60,7 +124,7 @@ function CouseList() {
                             <div ref={provided.innerRef} {...provided.droppableProps}>
 
 
-                                {courseData && courseBox.map(({id, title, price, type, picture}, index)=> (
+                                {courseData && courseBox.map(({id, title, price, type, picture, isShow}, index)=> (
 
                                     <Draggable
                                     key={id}
@@ -90,16 +154,23 @@ function CouseList() {
                                         className=" text-center text-sm w-[82px] h-[26] bg-[#DBFFCE] rounded-md border border-[#7e7e7e46]"
                                         >{type}</p>
 
-                                        <span 
-                                        onClick={()=> setOpenDropDown((prev)=> !prev)}
-                                        className=" rounded-full hover:bg-slate-300">
+                                        <span className=" rounded-full hover:bg-slate-300">
                                         
-                                            {/* <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12.0049 16.005L12.0049 15.995" stroke="#323232" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> <path d="M12.0049 12.005L12.0049 11.995" stroke="#323232" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> <path d="M12.0049 8.005L12.0049 7.995" stroke="#323232" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> </g></svg> */}
                                             <FontAwesomeIcon 
-                                            className="w-[20px] h-[15px] rounded-full p-1"
-                                            icon={faEllipsisVertical} />
+                                                onClick={handleDropDown}
+                                                className="w-[20px] h-[15px] rounded-full p-1"
+                                                data-id={id}
+                                                icon={faEllipsisVertical}
+                                            />
+
                                         </span>
-                                        {openDropDown && <DropDown/>}
+                                        {isShow && 
+                                            <DropDown 
+                                            id={id}
+                                            moveToTopHandler={moveToTopHandler} 
+                                            removeCourse={removeCourse}
+                                            /> }
+
                                     </div>
                                     </div>
                                     )}
