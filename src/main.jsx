@@ -5,6 +5,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import OtpForm from './components/OtpForm.jsx';
 import CourseList from './components/CouseList.jsx'
+import Batches from './components/Batches.jsx';
 
 
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: '/course-list',
     element: <CourseList/>
+  },
+  {
+    path: '/batches',
+    element: <Batches/>
   }
 ])
 
