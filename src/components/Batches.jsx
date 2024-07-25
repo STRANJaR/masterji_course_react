@@ -3,7 +3,6 @@ import batchesJSON from '../batches.json';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import '../App.css'
-import picture from '../assets/course1.png';
 import branding from '../assets/branding.png'
 
 function Batches() {
@@ -54,7 +53,7 @@ function Batches() {
                 type="search" 
                 name='search-form'
                 id='search-form'
-                className='outline-none border border-[#BEBEBE] p-2 ml-3 mb-2 w-68 rounded-md'
+                className='outline-none border border-[#BEBEBE] p-2 ml-3 mb-2 w-72 rounded-md'
                 placeholder='Search by Title (alt+k or cmd+k)'
                 />
 
@@ -89,7 +88,7 @@ function Batches() {
                                             <img 
                                             className='rounded-md'
                                             width={'100px'}
-                                            src={picture} alt={batch.title} />
+                                            src={batch.imageURL} alt={batch.title} />
                                             <h1>{batch.title}</h1>
                                         </div>
                                     </div>
