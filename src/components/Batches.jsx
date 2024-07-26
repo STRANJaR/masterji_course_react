@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import '../App.css'
 import branding from '../assets/branding.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft, faAngleRight,} from '@fortawesome/free-solid-svg-icons';
 
 function Batches() {
     const [batches, setBatches] = useState([])
@@ -39,7 +41,7 @@ function Batches() {
         ))
     }
   return (
-    <div className="bg-[#E2BBE9] border-white h-screen w-full ">
+    <div className="bg-[#E2BBE9] text-[#4B4747] border-white h-screen w-full ">
 
             <h1 className=" text-[#4F6F52] text-4xl font-extrabold text-center py-5">Chai aur Code</h1>
 
@@ -135,12 +137,39 @@ function Batches() {
 
             </div>
             
-            <div>
-                <div>
-                    <select name="Rows per page" id="paginatePage">
-                        
-                    </select>
-                </div>
+            <div className='flex justify-end px-5 py-2 gap-3 items-center text-sm'>
+                    <span>Rows Per Page</span>
+
+                    <div>
+                        <select 
+                        className='outline-none border text-black border-[#BEBEBE] px-3 py-1 rounded-sm'
+                        name="Rows per page" 
+                        id="paginatePage"
+                        >
+
+                            <option value="1">1</option>
+                            <option value="1">2</option>
+                            <option value="1">3</option>
+                            <option value="1">4</option>
+                            <option value="1">5</option>
+                            <option value="1">6</option>
+                            <option value="1">7</option>
+                            <option value="1">8</option>
+                        </select>
+                    </div>
+
+                    <div className='flex gap-3 text-2xl'>
+                        <FontAwesomeIcon 
+                        icon={faAngleLeft}
+                        className='cursor-pointer'
+                        />
+
+                        <FontAwesomeIcon 
+                        className='cursor-pointer'
+                        icon={faAngleRight}
+                        />
+
+                    </div>
             </div>
 
         </div>
