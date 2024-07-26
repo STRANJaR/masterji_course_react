@@ -39,10 +39,31 @@ The project 'Master ji' is totally build using latest framework which is React u
 ## ScreenShots
 
 - #### OTP FORM
+<br>
+https://raw.githubusercontent.com/STRANJaR/masterji_course_react/master/src/assets/Screenshot%20from%202024-07-26%2009-55-57.png
+<br>
+https://raw.githubusercontent.com/STRANJaR/masterji_course_react/master/src/assets/Screenshot%20from%202024-07-26%2009-56-11.png
+<br>
+https://raw.githubusercontent.com/STRANJaR/masterji_course_react/master/src/assets/Screenshot%20from%202024-07-26%2009-56-30.png
+<br>
+<br>
+
 
 - #### DRAG AND DROP COURSE CARD
+<br>
+https://raw.githubusercontent.com/STRANJaR/masterji_course_react/master/src/assets/Screenshot%20from%202024-07-26%2010-10-04.png
+<br>
+https://raw.githubusercontent.com/STRANJaR/masterji_course_react/master/src/assets/Screenshot%20from%202024-07-26%2010-10-25.png
+<br>
+https://raw.githubusercontent.com/STRANJaR/masterji_course_react/master/src/assets/Screenshot%20from%202024-07-26%2010-10-53.png
+<br>
+<br>
 
 - #### DATA TABLE
+<br>
+https://raw.githubusercontent.com/STRANJaR/masterji_course_react/master/src/assets/Screenshot%20from%202024-07-26%2010-11-19.png
+<br>
+https://raw.githubusercontent.com/STRANJaR/masterji_course_react/master/src/assets/Screenshot%20from%202024-07-26%2010-11-30.png
 
 
 
