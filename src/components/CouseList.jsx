@@ -14,7 +14,11 @@ function CouseList() {
     const [courseBox, setCourseBox] = useState(courseDataJSON);
 
     useState(()=> {
-        setCourseData(courseDataJSON)
+        try {
+            setCourseData(courseDataJSON)
+        } catch (error) {
+            console.log(error.message)
+        }
     }, [courseData, courseBox])
 
     // handle dragEnd for DragDropContext

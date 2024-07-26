@@ -9,16 +9,32 @@ function Batches() {
     const [batches, setBatches] = useState([])
     // const [isPublished , setIsPublished] = useState(true)
     const [query, setQuery] = useState("");
+    const [searchParam] = useState(["title"]);
 
     useEffect(()=> {    
-        setBatches(batchesJSON)
+        try {
+            setBatches(batchesJSON)
+        } catch (error) {
+            console.log(error.message)
+        }
     },[])
 
-    const serach_prams = Object.keys(Object.assign({}), ...batches);
-    const searchBox = (batches) => {
-        return batches.filter(data => (
-            serach_prams.some((prams)=>(
-                data[prams].toString().toLowerCase().includes(query)
+    // const serach_prams = Object.keys(Object.assign({}), ...batches);
+    // const searchBox = (batches) => {
+    //     return batches.filter(data => (
+    //         serach_prams.some((prams)=>(
+    //             data[prams].toString().toLowerCase().includes(query)
+    //         ))
+    //     ))
+    // }
+
+    const searchBox = () => {
+        return batches.filter(item => (
+            searchParam.some(newItem => (
+                item[newItem]
+                .toString()
+                .toLowerCase()
+                .indexOf(query.toLowerCase()) > -1
             ))
         ))
     }
@@ -39,7 +55,7 @@ function Batches() {
 
 
 
-        <div className=" h-auto w-3/4 relative top-6 left-10 bg-white rounded-md">
+        <div className=" h-4/5 w-3/4 p-2 relative top-1 left-10 bg-white rounded-md">
 
                     <div className='p-4'>
                         <h1 className="text-2xl font-bold text-[#313131]">Batches</h1>
@@ -50,6 +66,7 @@ function Batches() {
             <div className="bg-white text-[#4B4747] w-full h-auto ">
                 <input 
                 onChange={(e)=> setQuery(e.target.value)}
+                value={query}
                 type="search" 
                 name='search-form'
                 id='search-form'
@@ -62,6 +79,13 @@ function Batches() {
                 className='px-7 py-2.5 rounded-md ml-3  text-sm bg-[#6C6BAF] text-[#FFFFFF]'
                 >Search</button>
 
+                {/* <div>
+                    {searchBox(batches).map(item=>(
+                        <li key={item.title}>
+                            {item.title}
+                        </li>
+                    ))}
+                </div> */}
 
                 <table 
                 style={{width:"100%"}}
@@ -75,7 +99,7 @@ function Batches() {
                             <th>Vlidity/Expiry</th>
                             <th>Status</th>
                         </tr>
-                        {batchesJSON && batches.map(batch => (
+                        {batchesJSON && searchBox(batches).map(batch => (
                             <tbody  
                             className=""
                             key={batch.id}>
